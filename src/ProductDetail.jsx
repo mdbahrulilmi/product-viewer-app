@@ -34,11 +34,11 @@ export default function ProductDetail({open, setOpen, product}) {
 
               <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                 <img
+                  className="aspect-2/3 w-full rounded-lg bg-white sm:col-span-4 lg:col-span-5 object-contain"
                   src={product.image}
-                  className="aspect-2/3 w-full rounded-lg bg-gray-100 object-cover sm:col-span-4 lg:col-span-5"
                 />
                 <div className="sm:col-span-8 lg:col-span-7">
-                  <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.name}</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.title}</h2>
                     <p className="font-bold text-sm text-orange-600 dark:text-orange-600">{product.category}</p>
 
                   <section aria-labelledby="information-heading" className="mt-2">

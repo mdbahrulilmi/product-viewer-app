@@ -3,11 +3,11 @@ import ProductDetail from "./ProductDetail"
 export default function ProductCard({onClick, product})
 {
     return(
-    <div key={product.key} onClick={onClick} className="max-w-xs bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 cursor-pointer">
+    <div key={product.key} onClick={onClick} className="max-w-xs h-full flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 cursor-pointer">
         <a href="#"className="align-center flex justify-center">
             <img className="rounded-t-lg max-h-[200px]" src={product.image} alt="" />
         </a>
-        <div className="p-5">
+        <div className="p-5 flex flex-col flex-grow justify-between">
             <a href="#">
                 <h5 className="mb-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white ">{product.title}</h5>
             </a>
