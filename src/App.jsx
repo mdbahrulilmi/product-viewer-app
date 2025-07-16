@@ -1,13 +1,15 @@
 import './App.css'
-import Cart from './Cart'
-import ProductList from './ProductList'
+import Cart from './components/Cart'
+import ProductList from './components/ProductList'
+import { CartProvider } from './context/CartContext'
 
 function App() {
 
   return (
-   <>
+   <CartProvider>
+    <ProductList />
     <Cart/>
-   </>
+   </CartProvider>
   )
 }
 

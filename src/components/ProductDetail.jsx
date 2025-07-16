@@ -1,13 +1,20 @@
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/20/solid'
+import { useCart } from '../context/CartContext'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function ProductDetail({open, setOpen, product}) {
+    const { dispatch } = useCart();
     if (!product) return null
+
+    const handleAddToCart = (e) => {
+      dispatch({ type: "ADD_ITEM", payload: product });
+      setOpen(false);      
+    };
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop
@@ -77,14 +84,13 @@ export default function ProductDetail({open, setOpen, product}) {
                       Product options
                     </h3>
 
-                    <form>
                       <button
-                        type="submit"
+                        onClick={handleAddToCart}
                         className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
                       >
                         ADD TO CART
                       </button>
-                    </form>
+                    
                   </section>
                 </div>
               </div>

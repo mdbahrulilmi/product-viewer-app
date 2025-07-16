@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState} from 'react'
 import ProductCard from "./ProductCard";
 import ProductDetail from "./ProductDetail";
-
 
 
 export default function ProductList()
@@ -9,6 +8,7 @@ export default function ProductList()
     const [products, setProducts] = useState([])
     const [open, setOpen] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState(null)
+    
 
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
