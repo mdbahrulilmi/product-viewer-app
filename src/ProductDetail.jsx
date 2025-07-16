@@ -9,7 +9,6 @@ function classNames(...classes) {
 export default function ProductDetail({open, setOpen, product}) {
     if (!product) return null
   return (
-     <>
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop
         transition
@@ -94,6 +93,5 @@ export default function ProductDetail({open, setOpen, product}) {
         </div>
       </div>
     </Dialog>
-    </>
   )
 }

@@ -1,8 +1,7 @@
-'use client'
-
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import ProductCard from "./ProductCard";
 import ProductDetail from "./ProductDetail";
+
 
 
 export default function ProductList()
