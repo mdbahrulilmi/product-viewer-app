@@ -12,7 +12,8 @@ export default function ProductCard({onClick, product})
             <div className="bg-orange-100 px-[4px] w-fit mb-5">
                 <div className="font-bold text-sm text-orange-600 dark:text-orange-600">{product.category}</div>
                 </div>
-            <p className="mb-3 font-bold text-lg text-gray-700 dark:text-gray-400">{product.price}</p>
+            <p className="mb-3 font-bold text-lg text-gray-700 dark:text-gray-400">Rp {(product.price * 16000).toLocaleString('id-ID')}
+            </p>
             <button type="button" className="w-full cursor-pointer text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={onClick}>SHOW DETAIL</button>
         </div>
     </div>

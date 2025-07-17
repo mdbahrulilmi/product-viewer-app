@@ -53,7 +53,8 @@ export default function ProductDetail({open, setOpen, product}) {
                     </h3>
 
                     <p className="text-lg text-gray-900 text-justify mb-5">{product.description}</p>
-                    <p className="text-3xl text-gray-900 font-bold">{product.price}</p>
+                    <p className="text-3xl text-gray-900 font-bold">Rp {(product.price * 16000).toLocaleString('id-ID')}
+                    </p>
 
                     {/* Reviews */}
                     <div className="mt-6">

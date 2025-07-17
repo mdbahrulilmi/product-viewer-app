@@ -2,7 +2,35 @@ import { useCart } from "../context/CartContext"
 
 export default function Cart()
 {
+
     const { items, dispatch } = useCart();
+    const exchangeRate = 16000; // 1 USD =  16.000
+
+    const formatRupiah = (usdValue) => {
+        const idrValue = usdValue * exchangeRate;
+        return idrValue.toLocaleString("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+        });
+    };
+
+    const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const discount = subtotal > 250000 / exchangeRate ? 7000 / exchangeRate : 0;
+    const pickup = 12000 / exchangeRate;
+    const tax = subtotal * 0.12;
+    const total = subtotal - discount + pickup + tax;
+
+
+    const handleIncrementCount = (product) => {
+        dispatch({ type: "INCREMENT", payload: product });   
+      };
+    const handleDecrementCount = (product) => {
+        dispatch({ type: "DECREMENT", payload: product });
+    };
+    const handleRemoveCart = (product) => {
+        dispatch({ type: "REMOVE_ITEM", payload: product });
+    };
 
     return(
     <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
@@ -23,20 +51,20 @@ export default function Cart()
                     <label for="counter-input" class="sr-only">Choose quantity:</label>
                     <div class="flex items-center justify-between md:order-3 md:justify-end">
                         <div class="flex items-center">
-                        <button type="button" id="decrement-button" data-input-counter-decrement="counter-input" class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                        <button id="decrement-button" data-input-counter-decrement="counter-input" class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700" onClick={() => handleDecrementCount(item)}>
                             <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
                             </svg>
                         </button>
-                        <input type="text" id="counter-input" data-input-counter class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white" placeholder="" value="2" required />
-                        <button type="button" id="increment-button" data-input-counter-increment="counter-input" class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                        <input type="text" id="counter-input" data-input-counter class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white" placeholder="" value={item.quantity} required />
+                        <button id="increment-button" data-input-counter-increment="counter-input" class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700" onClick={() =>  handleIncrementCount(item)}>
                             <svg class="h-2.5 w-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
                             </svg>
                         </button>
                         </div>
                         <div class="text-end md:order-4 md:w-32">
-                        <p class="text-base font-bold text-gray-900 dark:text-white">{item.price}</p>
+                        <p class="text-base font-bold text-gray-900 dark:text-white"> {formatRupiah(item.price * item.quantity)}</p>
                         </div>
                     </div>
 
@@ -51,7 +79,7 @@ export default function Cart()
                             Add to Favorites
                         </button>
 
-                        <button type="button" class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
+                        <button class="inline-flex cursor-pointer items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500" onClick={() => handleRemoveCart(item)}>
                             <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
                             </svg>
@@ -72,28 +100,28 @@ export default function Cart()
                     <div class="space-y-2">
                     <dl class="flex items-center justify-between gap-4">
                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Original price</dt>
-                        <dd class="text-base font-medium text-gray-900 dark:text-white">$7,592.00</dd>
+                        <dd class="text-base font-medium text-gray-900 dark:text-white">{formatRupiah(subtotal)}</dd>
                     </dl>
 
                     <dl class="flex items-center justify-between gap-4">
                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Savings</dt>
-                        <dd class="text-base font-medium text-green-600">-$299.00</dd>
+                        <dd class="text-base font-medium text-green-600">{formatRupiah(discount)}</dd>
                     </dl>
 
                     <dl class="flex items-center justify-between gap-4">
                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Store Pickup</dt>
-                        <dd class="text-base font-medium text-gray-900 dark:text-white">$99</dd>
+                        <dd class="text-base font-medium text-gray-900 dark:text-white">{formatRupiah(pickup)}</dd>
                     </dl>
 
                     <dl class="flex items-center justify-between gap-4">
                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
-                        <dd class="text-base font-medium text-gray-900 dark:text-white">$799</dd>
+                        <dd class="text-base font-medium text-gray-900 dark:text-white">{formatRupiah(tax)}</dd>
                     </dl>
                     </div>
 
                     <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                     <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                    <dd class="text-base font-bold text-gray-900 dark:text-white">$8,191.00</dd>
+                    <dd class="text-base font-bold text-gray-900 dark:text-white">{formatRupiah(total)}</dd>
                     </dl>
                 </div>
 
