@@ -1,16 +1,22 @@
-import './App.css'
-import Cart from './components/Cart'
-import ProductList from './components/ProductList'
-import { CartProvider } from './context/CartContext'
+import './App.css';
+import { CartProvider } from './context/CartContext';
+import ProductList from './pages/ProductList';
+import Cart from './components/Cart';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from './layouts/Navbar';
 
 function App() {
-
   return (
-   <CartProvider>
-    <ProductList />
-    <Cart/>
-   </CartProvider>
-  )
+    <CartProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
+  );
 }
 
-export default App
+export default App;

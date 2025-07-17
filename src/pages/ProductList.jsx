@@ -1,6 +1,6 @@
-import { useEffect, useState} from 'react'
-import ProductCard from "./ProductCard";
-import ProductDetail from "./ProductDetail";
+import { useEffect, useState } from 'react'
+import ProductCard from "../components/ProductCard";
+import ProductDetail from "../components/ProductDetail";
 
 
 export default function ProductList()
