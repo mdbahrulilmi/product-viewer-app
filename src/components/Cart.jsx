@@ -1,8 +1,8 @@
+import { useMemo } from "react";
 import { useCart } from "../context/CartContext"
 
 export default function Cart()
 {
-
     const { items, dispatch } = useCart();
     const exchangeRate = 16000; // 1 USD =  16.000
 
@@ -15,7 +15,11 @@ export default function Cart()
         });
     };
 
-    const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const { subtotal} = useMemo(() => {
+        const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        return { subtotal }
+    });
+
     const discount = subtotal > 250000 / exchangeRate ? 7000 / exchangeRate : 0;
     const pickup = 12000 / exchangeRate;
     const tax = subtotal * 0.12;
@@ -24,7 +28,7 @@ export default function Cart()
 
     const handleIncrementCount = (product) => {
         dispatch({ type: "INCREMENT", payload: product });   
-      };
+      };    
     const handleDecrementCount = (product) => {
         dispatch({ type: "DECREMENT", payload: product });
     };
