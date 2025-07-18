@@ -1,10 +1,9 @@
 import './App.css';
 import { CartProvider } from './context/CartContext';
 import ProductList from './pages/ProductList';
-import Cart from './components/Cart';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './layouts/Navbar';
-
+import Cart from './pages/Cart';
 function App() {
   return (
     <CartProvider>
