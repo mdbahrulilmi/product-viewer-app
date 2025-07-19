@@ -10,8 +10,6 @@ export default function ProductList()
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [selectedCategories, setSelectedCategories] = useState([]);
 
-    
-
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
         .then((res) => {
@@ -21,8 +19,9 @@ export default function ProductList()
             setProducts(data)
         })
     },[])
+
     const categories = [...new Set(products.map(product => product.category))]
-    const filteredProducts = selectedCategories.length > 0
+    const filteredCategories = selectedCategories.length > 0
         ? products.filter(p => selectedCategories.includes(p.category))
         : products
 
@@ -48,7 +47,8 @@ export default function ProductList()
                     ))}
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
-                {products.map((product) => (
+                {
+                filteredCategories.map((product) => (
                     <ProductCard key={product.id} product={product} onClick={() => {
                         setSelectedProduct(product)
                         setOpen(true)
