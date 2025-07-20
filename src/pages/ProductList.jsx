@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import ProductCard from "../components/ProductCard";
 import ProductDetail from "../components/ProductDetail";
 import FilterCheckbox from '../components/FilterCheckbox';
+import FilterSearch from '../components/FilterSearch';
 
 export default function ProductList()
 {
@@ -9,6 +10,7 @@ export default function ProductList()
     const [open, setOpen] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [searchProducts, setSearchProducts] = useState('')
 
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
@@ -21,14 +23,28 @@ export default function ProductList()
     },[])
 
     const categories = [...new Set(products.map(product => product.category))]
-    const filteredCategories = selectedCategories.length > 0
-        ? products.filter(p => selectedCategories.includes(p.category))
-        : products
+
+
+    let filteredProducts = products
+
+    if(selectedCategories.length > 0){
+        filteredProducts = products.filter(p => selectedCategories.includes(p.category))
+    }
+    
+    if(searchProducts.length > 0){
+        filteredProducts = products.filter(p=> p.title.toLowerCase().includes(searchProducts.toLowerCase()));
+    }
+
 
     return(
         <>
         <div className='flex'>
-            <div className="w-[200px] p-5">
+            <div className="w-[200px] px-5">
+                <FilterSearch
+                onChange={(value) => {
+                    setSearchProducts(value);
+                }}
+                />
                <p className='font-bold mb-2'>Filter Category</p>
                 {categories.map((category) => (
                     <FilterCheckbox
@@ -46,9 +62,9 @@ export default function ProductList()
 
                     ))}
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-5">
                 {
-                filteredCategories.map((product) => (
+                filteredProducts.map((product) => (
                     <ProductCard key={product.id} product={product} onClick={() => {
                         setSelectedProduct(product)
                         setOpen(true)
