@@ -3,14 +3,15 @@ import ProductCard from "../components/ProductCard";
 import ProductDetail from "../components/ProductDetail";
 import FilterCheckbox from '../components/FilterCheckbox';
 import FilterSearch from '../components/FilterSearch';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export default function ProductList()
 {
     const [products, setProducts] = useState([])
     const [open, setOpen] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState(null)
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [searchProducts, setSearchProducts] = useState('')
+    const [selectedCategories, setSelectedCategories] = useLocalStorage('categories',[]);
+    const [searchProducts, setSearchProducts] = useLocalStorage('search','')
 
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
@@ -30,9 +31,15 @@ export default function ProductList()
     if(selectedCategories.length > 0){
         filteredProducts = products.filter(p => selectedCategories.includes(p.category))
     }
-    
+
     if(searchProducts.length > 0){
         filteredProducts = products.filter(p=> p.title.toLowerCase().includes(searchProducts.toLowerCase()));
+    }
+
+    if(selectedCategories.length > 0 && searchProducts.length > 0){
+        filteredProducts = products.filter(
+        p => selectedCategories.includes(p.category) &&
+        p.title.toLowerCase().includes(searchProducts.toLowerCase()))
     }
 
 
@@ -41,6 +48,7 @@ export default function ProductList()
         <div className='flex'>
             <div className="w-[200px] px-5">
                 <FilterSearch
+                value={searchProducts}
                 onChange={(value) => {
                     setSearchProducts(value);
                 }}

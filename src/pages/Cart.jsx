@@ -4,7 +4,7 @@ import { useCart } from "../context/CartContext"
 export default function Cart()
 {
     const { items, dispatch } = useCart();
-    const exchangeRate = 16000; // 1 USD =  16.000
+    const exchangeRate = 16000;
 
     const formatRupiah = (usdValue) => {
         const idrValue = usdValue * exchangeRate;
