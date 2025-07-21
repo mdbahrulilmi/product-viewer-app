@@ -4,14 +4,14 @@ import ProductDetail from "../components/ProductDetail";
 import FilterCheckbox from '../components/FilterCheckbox';
 import FilterSearch from '../components/FilterSearch';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import Sidebar from '../layouts/Sidebar';
 
-export default function ProductList()
+export default function ProductList({searchProducts})
 {
     const [products, setProducts] = useState([])
     const [open, setOpen] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [selectedCategories, setSelectedCategories] = useLocalStorage('categories',[]);
-    const [searchProducts, setSearchProducts] = useLocalStorage('search','')
 
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
@@ -22,9 +22,8 @@ export default function ProductList()
             setProducts(data)
         })
     },[])
-
+    
     const categories = [...new Set(products.map(product => product.category))]
-
 
     let filteredProducts = products
 
@@ -45,32 +44,13 @@ export default function ProductList()
 
     return(
         <>
-        <div className='flex'>
-            <div className="w-[200px] px-5">
-                <FilterSearch
-                value={searchProducts}
-                onChange={(value) => {
-                    setSearchProducts(value);
-                }}
-                />
-               <p className='font-bold mb-2'>Filter Category</p>
-                {categories.map((category) => (
-                    <FilterCheckbox
-                        key={category}
-                        category={category}
-                        checked={selectedCategories.includes(category)}
-                        onChange={(checked) => {
-                            setSelectedCategories(prev =>
-                            checked
-                                ? [...prev, category]
-                                : prev.filter(c => c !== category)
-                            )
-                        }}
-                        />
-
-                    ))}
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-5">
+        <div className='flex px-[5%]'>
+            <Sidebar 
+            categories={categories} 
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+            />
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-2 px-5 items-stretch">
                 {
                 filteredProducts.map((product) => (
                     <ProductCard key={product.id} product={product} onClick={() => {
