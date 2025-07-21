@@ -14,7 +14,7 @@ export default function Navbar({searchbar}){
   }, [darkMode]);
 
     return(
-    <nav class="bg-white shadow-sm mb-5">
+    <nav class="bg-white dark:bg-gray-800 shadow-sm">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="" class="h-8" alt="" />
@@ -28,7 +28,7 @@ export default function Navbar({searchbar}){
         </svg>
     </button>
     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
             <li>
             <Link
                 to="/"
@@ -60,7 +60,7 @@ export default function Navbar({searchbar}){
                         onChange={() => setDarkMode(!darkMode)}
                         />
                         <div className={`block border-[1px] border-gray-200 dark:border-white  w-13 h-7 rounded-full ${darkMode ? "bg-gray-800" : "bg-white"}`}></div>
-                        <div className={`dot absolute left-1 top-1 w-5 h-5 rounded-full transition ${darkMode ? "translate-x-5 bg-white" : "bg-gray-800"}`}></div>
+                        <div className={`dot absolute left-1 top-1 w-5 h-5 rounded-full transition ${darkMode ? "translate-x-6 bg-white" : "bg-gray-800"}`}></div>
                         </div>
                     </label>
                     </div>

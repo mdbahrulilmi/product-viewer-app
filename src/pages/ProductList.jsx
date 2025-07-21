@@ -44,7 +44,7 @@ export default function ProductList({searchProducts})
 
     return(
         <>
-        <div className='flex px-[5%]'>
+        <div class="flex px-[5%] py-8 bg-white dark:bg-gray-900 dark:text-gray-200">
             <Sidebar 
             categories={categories} 
             selectedCategories={selectedCategories}

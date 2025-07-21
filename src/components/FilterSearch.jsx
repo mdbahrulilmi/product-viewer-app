@@ -3,7 +3,7 @@ import { IoIosSearch } from "react-icons/io";
 export default function FilterSearch({value, onChange})
 {
     return(
-        <div className="flex border border-gray-200 rounded-xs p-1 w-[600px] shadow-sm">
+        <div className="flex border border-gray-200 rounded-xs p-1 w-[600px] shadow-sm dark:text-gray-200">
             <input className="px-2 w-full outline-none" 
             type="text" 
             placeholder="Search"
