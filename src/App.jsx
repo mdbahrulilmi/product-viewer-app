@@ -14,8 +14,7 @@ function App() {
       <BrowserRouter>
         <Navbar searchbar={
           <FilterSearch
-            value={searchProducts}
-            onChange={(value) => {
+            onSubmit={(value) => {
                 setSearchProducts(value);
             }}
             />
