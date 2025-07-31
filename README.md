@@ -35,9 +35,3 @@ JavaScript
 ESLint
 
 Tailwind
-
-🧑‍💻 Getting Started
-git clone https://github.com/mdbahrulilmi/product-viewer-app.git
-cd product-viewer-app
-npm install
-npm run dev
