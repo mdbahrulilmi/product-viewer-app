@@ -1,12 +1,43 @@
-# React + Vite
+🛍️ product-viewer-app
+A simple and minimal React application built with Vite that displays product data from Fake Store API. This app includes category filtering, a search bar, and a shopping cart that totals the selected items' prices.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔎 Preview
 
-Currently, two official plugins are available:
+![Preview App](preview1.PNG)
+![Preview Cart](preview2.PNG)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 Features
+🔄 Fast Refresh via Vite
 
-## Expanding the ESLint configuration
+📦 Displays product data from Fake Store API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🔍 Search bar for filtering products by name/title
+
+🗂️ Category filter to view products by category
+
+🛒 Shopping cart to collect and total selected items
+
+🌙 Dark mode toggle to match user preference
+
+✅ Basic ESLint rules configured
+
+💡 Ready to expand with TypeScript and type-aware linting
+
+
+
+📦 Tech Stack
+React
+
+Vite
+
+JavaScript
+
+ESLint
+
+Tailwind
+
+🧑‍💻 Getting Started
+git clone https://github.com/mdbahrulilmi/product-viewer-app.git
+cd product-viewer-app
+npm install
+npm run dev
